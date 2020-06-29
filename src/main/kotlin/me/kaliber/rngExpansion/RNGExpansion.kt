@@ -1,7 +1,7 @@
 package me.kaliber.rngExpansion
 
-import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.OfflinePlayer
+import me.clip.placeholderapi.expansion.PlaceholderExpansion
 
 class RNGExpansion: PlaceholderExpansion() {
 
@@ -21,15 +21,21 @@ class RNGExpansion: PlaceholderExpansion() {
         return "rng"
     }
 
+    companion object {
+        const val minimum = "min:"
+        const val maximum = "max:"
+    }
+
     override fun onRequest(p: OfflinePlayer, identifier: String): String {
         when {
             identifier == "random" -> return (1..Int.MAX_VALUE).random().toString()
 
-            identifier.contains("min:", ignoreCase = true) && identifier.contains("max:", ignoreCase = true) -> {
-                val min = identifier.substringAfter("min:").substringBefore("_").toIntOrNull()
-                val max = identifier.substringAfter("max:").toIntOrNull()
-                val random = (max?.let { min?.rangeTo(it) })?.random()
-                return random.toString()
+            identifier.contains(minimum, ignoreCase = true) && identifier.contains(maximum, ignoreCase = true) -> {
+                val min = identifier.substringAfter(minimum).substringBefore('_').toIntOrNull()
+                val max = identifier.substringAfter(maximum).toIntOrNull()
+                if (min != null && max != null) {
+                    return (min..max).random().toString()
+                }
             }
         }
         return ""
