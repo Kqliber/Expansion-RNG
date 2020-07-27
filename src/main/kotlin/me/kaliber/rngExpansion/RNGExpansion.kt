@@ -3,7 +3,7 @@ package me.kaliber.rngExpansion
 import org.bukkit.OfflinePlayer
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 
-class RNGExpansion: PlaceholderExpansion() {
+class RNGExpansion : PlaceholderExpansion() {
 
     override fun canRegister(): Boolean {
         return true
@@ -21,11 +21,6 @@ class RNGExpansion: PlaceholderExpansion() {
         return "rng"
     }
 
-    companion object {
-        const val minimum = "min:"
-        const val maximum = "max:"
-    }
-
     override fun onRequest(p: OfflinePlayer, identifier: String): String {
         when {
             identifier == "random" -> return (1..Int.MAX_VALUE).random().toString()
@@ -39,5 +34,9 @@ class RNGExpansion: PlaceholderExpansion() {
             }
         }
         return ""
+    }
+    companion object {
+        const val minimum = "min:"
+        const val maximum = "max:"
     }
 }
