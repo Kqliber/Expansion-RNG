@@ -14,29 +14,31 @@ class RNGExpansion : PlaceholderExpansion() {
     }
 
     override fun getVersion(): String {
-        return "1.0"
+        return "1.0.2"
     }
 
     override fun getIdentifier(): String {
         return "rng"
     }
 
-    override fun onRequest(p: OfflinePlayer, identifier: String): String {
+    override fun onRequest(p: OfflinePlayer, arg: String): String? {
         when {
-            identifier == "random" -> return (1..Int.MAX_VALUE).random().toString()
+            arg == "random" -> return (1..Int.MAX_VALUE).random().toString()
 
-            identifier.contains(minimum, ignoreCase = true) && identifier.contains(maximum, ignoreCase = true) -> {
-                val min = identifier.substringAfter(minimum).substringBefore('_').toIntOrNull()
-                val max = identifier.substringAfter(maximum).toIntOrNull()
+            arg.contains(minimum, ignoreCase = true) && arg.contains(maximum, ignoreCase = true) -> {
+                val min = arg.substringAfter(minimum).substringBefore('_').toIntOrNull()
+                val max = arg.substringAfter(maximum).toIntOrNull()
                 if (min != null && max != null) {
                     return (min..max).random().toString()
                 }
             }
         }
-        return ""
+        return null
     }
+
     companion object {
         const val minimum = "min:"
         const val maximum = "max:"
     }
+
 }
