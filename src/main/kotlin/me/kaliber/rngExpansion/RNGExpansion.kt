@@ -14,7 +14,7 @@ class RNGExpansion : PlaceholderExpansion() {
     }
 
     override fun getVersion(): String {
-        return "1.0.2"
+        return "1.0.3"
     }
 
     override fun getIdentifier(): String {
