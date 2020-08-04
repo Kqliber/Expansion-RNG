@@ -21,13 +21,14 @@ class RNGExpansion : PlaceholderExpansion() {
         return "rng"
     }
 
-    override fun onRequest(p: OfflinePlayer, arg: String): String? {
+    override fun onRequest(p: OfflinePlayer, input: String): String? {
         when {
-            arg == "random" -> return (1..Int.MAX_VALUE).random().toString()
+            input == "random" -> return (1..Int.MAX_VALUE).random().toString()
 
-            arg.contains(minimum, ignoreCase = true) && arg.contains(maximum, ignoreCase = true) -> {
-                val min = arg.substringAfter(minimum).substringBefore('_').toIntOrNull()
-                val max = arg.substringAfter(maximum).toIntOrNull()
+            input.contains(minimum, ignoreCase = true) && input.contains(maximum, ignoreCase = true) -> {
+                val args = input.split('_')
+                val min = args[0].substringAfter(minimum).toIntOrNull()
+                val max = args[1].substringAfter(maximum).toIntOrNull()
                 if (min != null && max != null) {
                     return (min..max).random().toString()
                 }
