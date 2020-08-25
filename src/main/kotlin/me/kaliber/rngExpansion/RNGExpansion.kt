@@ -14,7 +14,7 @@ class RNGExpansion : PlaceholderExpansion() {
     }
 
     override fun getVersion(): String {
-        return "1.0.3"
+        return "1.1"
     }
 
     override fun getIdentifier(): String {
@@ -37,12 +37,12 @@ class RNGExpansion : PlaceholderExpansion() {
                         max = min-max
                         min -= max
                     }
-                    return(min..max).random().toString()
+                    return (min..max).random().toString()
                 }
             }
 
             input.toIntOrNull() != null -> {
-                return(input.toInt()..Int.MAX_VALUE).random().toString()
+                return (input.toInt()..Int.MAX_VALUE).random().toString()
             }
         }
         return null
