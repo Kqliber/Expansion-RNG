@@ -31,8 +31,8 @@ class RNGExpansion : PlaceholderExpansion() {
                 var min = args[0].toIntOrNull()
                 var max = args[1].toIntOrNull()
 
-                if(min != null && max != null) {
-                    if (min > max){
+                if (min != null && max != null) {
+                    if (min > max) {
                         min += max
                         max = min-max
                         min -= max
