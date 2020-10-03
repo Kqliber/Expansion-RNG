@@ -28,17 +28,13 @@ class RNGExpansion : PlaceholderExpansion() {
             input.contains(',') -> {
 
                 val args = input.split(',')
-                var min = args[0].toIntOrNull()
-                var max = args[1].toIntOrNull()
-
-                if (min != null && max != null) {
-                    if (min > max) {
-                        min += max
-                        max = min-max
-                        min -= max
-                    }
-                    return (min..max).random().toString()
-                }
+                if (args[0].toIntOrNull() == null || args[1].toIntOrNull() == null) return null
+                
+                var min = min(args[0].toInt(),args[1].toInt())
+                var max = max(args[0].toInt(),args[1].toInt())
+                
+                return (min..max).random().toString()
+                
             }
 
             input.toIntOrNull() != null -> {
