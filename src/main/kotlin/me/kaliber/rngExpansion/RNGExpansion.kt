@@ -1,5 +1,7 @@
 package me.kaliber.rngExpansion
 
+import kotlin.math.min
+import kotlin.math.max
 import org.bukkit.OfflinePlayer
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 
@@ -25,20 +27,18 @@ class RNGExpansion : PlaceholderExpansion() {
         when {
             input == "random" -> return (1..Int.MAX_VALUE).random().toString()
 
-            input.contains(',') -> {
+            input.toIntOrNull() != null -> {
+                return (input.toInt()..Int.MAX_VALUE).random().toString()
+            }
 
+            input.contains(',') -> {
                 val args = input.split(',')
                 if (args[0].toIntOrNull() == null || args[1].toIntOrNull() == null) return null
                 
-                var min = min(args[0].toInt(),args[1].toInt())
-                var max = max(args[0].toInt(),args[1].toInt())
+                val min = min(args[0].toInt(), args[1].toInt())
+                val max = max(args[0].toInt(), args[1].toInt())
                 
                 return (min..max).random().toString()
-                
-            }
-
-            input.toIntOrNull() != null -> {
-                return (input.toInt()..Int.MAX_VALUE).random().toString()
             }
         }
         return null
