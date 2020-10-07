@@ -25,7 +25,7 @@ class RNGExpansion : PlaceholderExpansion() {
 
     override fun onRequest(p: OfflinePlayer, input: String): String? {
         when {
-            input == "random" -> return (1..Int.MAX_VALUE).random().toString()
+            input == "random" -> return (0..Int.MAX_VALUE).random().toString()
 
             input.toIntOrNull() != null -> {
                 return (input.toInt()..Int.MAX_VALUE).random().toString()
