@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'me.kaliber'
-version '1.1.1'
+version '1.2'
 
 repositories {
     mavenCentral()
@@ -17,18 +17,18 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
-    compileOnly "org.spigotmc:spigot-api:+"
-    compileOnly group: 'me.clip', name: 'placeholderapi', version: '2.10.6'
+    compileOnly 'org.spigotmc:spigot-api:+'
+    compileOnly 'me.clip:placeholderapi:2.10.9'
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = '1.8'
 }
 
 shadowJar {
-    archiveFileName = "Expansion-RNG.jar"
+    archiveFileName = 'Expansion-RNG.jar'
     relocate 'kotlin', 'me.kaliber.rngExpansion.libs'
     minimize()
 }
