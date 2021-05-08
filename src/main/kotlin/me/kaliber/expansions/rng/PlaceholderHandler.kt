@@ -11,11 +11,12 @@ internal class RNGPlaceholderHandler
     // will keep track of the last random number generated for the %rng_last_generated% placeholder
     private var lastNumber = 0
 
-    internal fun handle(player: OfflinePlayer, identifier: String): String?
+    internal fun handle(player: OfflinePlayer?, identifier: String): String?
     {
 
         // sets input to allow for bracket placeholders to be randomized
-        val input = PlaceholderAPI.setBracketPlaceholders(player, identifier)
+        val input = if (player != null) PlaceholderAPI.setBracketPlaceholders(player, identifier)
+                    else identifier
 
         return when
         {
