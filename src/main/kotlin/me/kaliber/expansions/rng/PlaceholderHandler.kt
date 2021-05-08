@@ -15,8 +15,7 @@ internal class RNGPlaceholderHandler
     {
 
         // sets input to allow for bracket placeholders to be randomized
-        val input = if (player != null) PlaceholderAPI.setBracketPlaceholders(player, identifier)
-                    else identifier
+        val input = PlaceholderAPI.setBracketPlaceholders(player, identifier)
 
         return when
         {
