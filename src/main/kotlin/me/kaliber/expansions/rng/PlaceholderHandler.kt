@@ -32,7 +32,15 @@ internal class RNGPlaceholderHandler
             input == "last_generated" -> lastNumber.toString()
 
             // returns a random online player's name
-            input == "online_player" -> Bukkit.getOnlinePlayers().random().name
+            input == "online_player" ->
+            {
+                val online = Bukkit.getOnlinePlayers()
+                if (online.isEmpty())
+                {
+                    return null
+                }
+                online.random().name
+            }
 
             // returns a random number that are being inputted between ','
             input.contains(',') ->
