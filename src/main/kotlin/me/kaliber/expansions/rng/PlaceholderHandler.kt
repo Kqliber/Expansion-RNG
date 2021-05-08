@@ -2,6 +2,7 @@ package me.kaliber.expansions.rng
 
 import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.OfflinePlayer
+import org.bukkit.Bukkit
 import kotlin.math.max
 import kotlin.math.min
 
@@ -29,6 +30,9 @@ internal class RNGPlaceholderHandler
 
             // returns the last generated number from this expansion
             input == "last_generated" -> lastNumber.toString()
+
+            // returns a random online player's name
+            input == "online_player" -> Bukkit.getOnlinePlayers().random().name
 
             // returns a random number that are being inputted between ','
             input.contains(',') ->
