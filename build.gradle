@@ -27,5 +27,6 @@ shadowJar {
     archiveFileName = 'Expansion-RNG.jar'
     relocate 'kotlin', 'me.kaliber.expansions.rng.libs.kotlin'
     relocate 'org.jetbrains', 'me.kaliber.expansions.rng.libs.jetbrains'
+    exclude 'META-INF/versions/9/module-info.class' // papi classloading bad - java 8 support
     minimize()
 }
