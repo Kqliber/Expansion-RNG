@@ -18,7 +18,7 @@ class RNGExpansion : PlaceholderExpansion()
 
     override fun getVersion(): String
     {
-        return "1.3.1"
+        return "1.3.2"
     }
 
     override fun getIdentifier(): String
@@ -28,7 +28,7 @@ class RNGExpansion : PlaceholderExpansion()
 
     private val handler = RNGPlaceholderHandler()
 
-    override fun onRequest(player: OfflinePlayer, identifier: String): String?
+    override fun onRequest(player: OfflinePlayer?, identifier: String): String?
     {
         return handler.handle(player, identifier)
     }
