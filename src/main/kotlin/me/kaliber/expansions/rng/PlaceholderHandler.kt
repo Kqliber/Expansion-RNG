@@ -45,9 +45,7 @@ internal class RNGPlaceholderHandler
             // returns a random number that are being inputted between ','
             input.contains(',') ->
             {
-                val args = input.split(',')
-                val first = args[0].convertToInt()
-                val second = args[1].convertToInt()
+                val (first, second) = input.split(',').map(String::convertToInt)
 
                 if (first == null || second == null)
                 {
@@ -65,9 +63,4 @@ internal class RNGPlaceholderHandler
         }
     }
 
-    // allows for decimals to be inputted
-    private fun String.convertToInt(): Int?
-    {
-        return this.toDoubleOrNull()?.toInt()
-    }
 }
