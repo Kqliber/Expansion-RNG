@@ -45,11 +45,12 @@ internal class RNGPlaceholderHandler
             // returns a random number that are being inputted between ','
             input.contains(',') ->
             {
-                val (first, second) = input.split(',').map(String::convertToInt)
+                val list = input.split(',')
+                val (first, second) = list.map(String::convertToInt)
 
                 if (first == null || second == null)
                 {
-                    return null
+                    return list.random()
                 }
 
                 val min = min(first, second)
