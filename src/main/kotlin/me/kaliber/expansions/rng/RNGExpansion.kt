@@ -6,6 +6,8 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion
 class RNGExpansion : PlaceholderExpansion()
 {
 
+    private val handler = RNGPlaceholderHandler()
+
     override fun canRegister(): Boolean
     {
         return true
@@ -25,8 +27,6 @@ class RNGExpansion : PlaceholderExpansion()
     {
         return "rng"
     }
-
-    private val handler = RNGPlaceholderHandler()
 
     override fun onRequest(player: OfflinePlayer?, identifier: String): String?
     {
