@@ -60,6 +60,15 @@ internal class RNGPlaceholderHandler
                 lastNumber = number
                 number.toString()
             }
+
+            // get a random element from a specified list
+            input.startsWith("list:") ->
+            {
+                val list = input.substringAfter("list:").split(',').mapNotNull(String::convertToInt)
+                val number = list.random()
+                lastNumber = number
+                number.toString()
+            }
             else -> null
         }
     }
