@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.21'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
@@ -17,12 +17,12 @@ repositories {
 }
 
 dependencies {
-    implementation ('org.jetbrains.kotlin:kotlin-stdlib:1.5.21') {
+    implementation ('org.jetbrains.kotlin:kotlin-stdlib:1.6.0') {
         exclude group: 'org.jetbrains'
     }
 
-    compileOnly 'io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT'
-    compileOnly 'me.clip:placeholderapi:2.10.10'
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
+    compileOnly 'me.clip:placeholderapi:2.11.1'
 }
 
 shadowJar {
