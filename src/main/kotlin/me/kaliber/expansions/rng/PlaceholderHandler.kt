@@ -50,7 +50,7 @@ internal class RNGPlaceholderHandler
 
                 if (first == null || second == null)
                 {
-                    return list.random()
+                    return null
                 }
 
                 val min = min(first, second)
