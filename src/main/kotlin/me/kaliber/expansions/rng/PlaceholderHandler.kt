@@ -24,8 +24,7 @@ internal class RNGPlaceholderHandler
             input == "random" ->
             {
                 val number = (1..Int.MAX_VALUE).random()
-                lastNumber = number
-                number.toString()
+                returnNum(number)
             }
 
             // returns the last generated number from this expansion
@@ -42,11 +41,28 @@ internal class RNGPlaceholderHandler
                 online.random().name
             }
 
+            // get a random element from a specified list
+            input.startsWith("list:") ->
+            {
+                val weightHandler = WeightedNumberHandler()
+
+                val list = input.substringAfter("list:").split(',')
+                if (input.contains(';'))
+                {
+                    list.map(::parseWeightedNumber).forEach(weightHandler::add)
+                    val number = weightHandler.random() ?: return null
+
+                    return returnNum(number)
+                }
+
+                val number = list.mapNotNull(String::convertToInt).random()
+                returnNum(number)
+            }
+
             // returns a random number that are being inputted between ','
             input.contains(',') ->
             {
-                val list = input.split(',')
-                val (first, second) = list.map(String::convertToInt)
+                val (first, second) = input.split(',').map(String::convertToInt)
 
                 if (first == null || second == null)
                 {
@@ -57,20 +73,27 @@ internal class RNGPlaceholderHandler
                 val max = max(first, second)
 
                 val number = (min..max).random()
-                lastNumber = number
-                number.toString()
+                returnNum(number)
             }
 
-            // get a random element from a specified list
-            input.startsWith("list:") ->
-            {
-                val list = input.substringAfter("list:").split(',').mapNotNull(String::convertToInt)
-                val number = list.random()
-                lastNumber = number
-                number.toString()
-            }
             else -> null
         }
+    }
+
+    private fun parseWeightedNumber(string: String): WeightedNumber
+    {
+        val number = string.substringBefore(';').convertToInt() ?: 0
+        val weight = string.substringAfter(';').convertToInt() ?: 0
+        return WeightedNumber(number, weight)
+    }
+
+    /**
+     * Utility function to set the last generated number, and easily return the number
+     */
+    private fun returnNum(type: Int): String
+    {
+        lastNumber = type
+        return type.toString()
     }
 
 }
