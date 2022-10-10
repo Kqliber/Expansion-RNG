@@ -6,23 +6,19 @@ import org.bukkit.Bukkit
 import kotlin.math.max
 import kotlin.math.min
 
-internal class RNGPlaceholderHandler
-{
+internal class RNGPlaceholderHandler {
 
     // will keep track of the last random number generated for the %rng_last_generated% placeholder
     private var lastNumber = 0
 
-    internal fun handle(player: OfflinePlayer?, identifier: String): String?
-    {
+    internal fun handle(player: OfflinePlayer?, identifier: String): String? {
 
         // sets input to allow for bracket placeholders to be randomized
         val input = PlaceholderAPI.setBracketPlaceholders(player, identifier)
 
-        return when
-        {
+        return when {
             // returns a random number from 1-2147483647
-            input == "random" ->
-            {
+            input == "random" -> {
                 val number = (1..Int.MAX_VALUE).random()
                 returnNum(number)
             }
@@ -31,41 +27,33 @@ internal class RNGPlaceholderHandler
             input == "last_generated" -> lastNumber.toString()
 
             // returns a random online player's name
-            input == "online_player" ->
-            {
+            input == "online_player" -> {
                 val online = Bukkit.getOnlinePlayers()
-                if (online.isEmpty())
-                {
+                if (online.isEmpty()) {
                     return null
                 }
                 online.random().name
             }
 
             // get a random element from a specified list
-            input.startsWith("list:") ->
-            {
-                val weightHandler = WeightedNumberHandler()
+            input.startsWith("list:") -> {
+                val weightHandler = WeightedStringHandler()
 
                 val list = input.substringAfter("list:").split(',')
-                if (input.contains(';'))
-                {
-                    list.map(::parseWeightedNumber).forEach(weightHandler::add)
-                    val number = weightHandler.random() ?: return null
 
-                    return returnNum(number)
+                if (input.contains(';')) {
+                    list.map(::parseWeightedNumber).forEach(weightHandler::add)
+                    return weightHandler.random()
                 }
 
-                val number = list.mapNotNull(String::convertToInt).random()
-                returnNum(number)
+                return list.random()
             }
 
             // returns a random number that are being inputted between ','
-            input.contains(',') ->
-            {
+            input.contains(',') -> {
                 val (first, second) = input.split(',').map(String::convertToInt)
 
-                if (first == null || second == null)
-                {
+                if (first == null || second == null) {
                     return null
                 }
 
@@ -80,18 +68,16 @@ internal class RNGPlaceholderHandler
         }
     }
 
-    private fun parseWeightedNumber(string: String): WeightedNumber
-    {
-        val number = string.substringBefore(';').convertToInt() ?: 0
+    private fun parseWeightedNumber(string: String): WeightedString {
+        val value = string.substringBefore(';')
         val weight = string.substringAfter(';').convertToInt() ?: 0
-        return WeightedNumber(number, weight)
+        return WeightedString(value, weight)
     }
 
     /**
      * Utility function to set the last generated number, and easily return the number
      */
-    private fun returnNum(type: Int): String
-    {
+    private fun returnNum(type: Int): String {
         lastNumber = type
         return type.toString()
     }
