@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'me.kaliber'
-version '1.4.0'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
         url 'https://repo.extendedclip.com/content/repositories/placeholderapi'
     }
     maven {
-        url 'https://papermc.io/repo/repository/maven-public/'
+        url 'https://maven.hytale.com/release/'
     }
 }
 
@@ -21,8 +21,8 @@ dependencies {
         exclude group: 'org.jetbrains'
     }
 
-    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
-    compileOnly 'me.clip:placeholderapi:2.11.1'
+    compileOnly 'com.hypixel.hytale:Server:2026.01.24-6e2d4fc36'
+    compileOnly 'at.helpch:placeholderapi-hytale:1.0.1'
 }
 
 shadowJar {

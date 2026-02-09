@@ -1,8 +1,8 @@
 package me.kaliber.expansions.rng
 
-import me.clip.placeholderapi.PlaceholderAPI
-import org.bukkit.OfflinePlayer
-import org.bukkit.Bukkit
+import at.helpch.placeholderapi.PlaceholderAPI
+import com.hypixel.hytale.server.core.universe.PlayerRef
+import com.hypixel.hytale.server.core.universe.Universe
 import kotlin.math.max
 import kotlin.math.min
 
@@ -12,7 +12,7 @@ internal class RNGPlaceholderHandler
     // will keep track of the last random number generated for the %rng_last_generated% placeholder
     private var lastNumber = 0
 
-    internal fun handle(player: OfflinePlayer?, identifier: String): String?
+    internal fun handle(player: PlayerRef?, identifier: String): String?
     {
 
         // sets input to allow for bracket placeholders to be randomized
@@ -33,12 +33,12 @@ internal class RNGPlaceholderHandler
             // returns a random online player's name
             input == "online_player" ->
             {
-                val online = Bukkit.getOnlinePlayers()
+                val online = Universe.get().players
                 if (online.isEmpty())
                 {
                     return null
                 }
-                online.random().name
+                online.random().username
             }
 
             // get a random element from a specified list

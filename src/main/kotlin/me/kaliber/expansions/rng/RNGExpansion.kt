@@ -1,7 +1,7 @@
 package me.kaliber.expansions.rng
 
-import org.bukkit.OfflinePlayer
-import me.clip.placeholderapi.expansion.PlaceholderExpansion
+import com.hypixel.hytale.server.core.universe.PlayerRef
+import at.helpch.placeholderapi.expansion.PlaceholderExpansion
 
 class RNGExpansion : PlaceholderExpansion()
 {
@@ -20,7 +20,7 @@ class RNGExpansion : PlaceholderExpansion()
 
     override fun getVersion(): String
     {
-        return "1.4.0"
+        return "1.0.0"
     }
 
     override fun getIdentifier(): String
@@ -28,7 +28,7 @@ class RNGExpansion : PlaceholderExpansion()
         return "rng"
     }
 
-    override fun onRequest(player: OfflinePlayer?, identifier: String): String?
+    override fun onPlaceholderRequest(player: PlayerRef?, identifier: String): String?
     {
         return handler.handle(player, identifier)
     }
